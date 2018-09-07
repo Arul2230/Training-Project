@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+   <bean id="employeeDaoImpl" class="com.ideas2it.employeeinformation.employee.dao.impl.EmployeeDaoImpl" />
+
+   <bean id="employeeServiceImpl" class="com.ideas2it.employeeinformation.employee.service.impl.EmployeeServiceImpl">
+      <property name="employeeDao" ref="employeeDaoImpl" />
+   </bean>
+
+   <bean id="employeeController" class="com.ideas2it.employeeinformation.employee.controller.EmployeeController">
+      <property name="employeeService" ref="employeeServiceImpl" />
+   </bean>
+
+   <bean id="projectDaoImpl" class="com.ideas2it.employeeinformation.project.dao.impl.ProjectDaoImpl" />
+
+   <bean id="projectServiceImpl" class="com.ideas2it.employeeinformation.project.service.impl.ProjectServiceImpl">
+      <property name="projectDao" ref="projectDaoImpl" />
+      <property name="employeeService" ref="employeeServiceImpl" />
+   </bean>
+
+   <bean id="projectController" class="com.ideas2it.employeeinformation.project.controller.ProjectController">
+      <property name="projectService" ref="projectServiceImpl" />
+   </bean>
+
+   <bean id="clientDaoImpl" class="com.ideas2it.employeeinformation.client.dao.impl.ClientDaoImpl" />
+
+   <bean id="clientServiceImpl" class="com.ideas2it.employeeinformation.client.service.impl.ClientServiceImpl">
+      <property name="clientDao" ref="clientDaoImpl" />
+      <property name="projectService" ref="projectServiceImpl" />
+   </bean>
+
+   <bean id="clientController" class="com.ideas2it.employeeinformation.client.controller.ClientController">
+      <property name="clientService" ref="clientServiceImpl" />
+   </bean>
+
+   <bean id="userDaoImpl" class="com.ideas2it.employeeinformation.user.dao.impl.UserDaoImpl" />
+
+   <bean id="userServiceImpl" class="com.ideas2it.employeeinformation.user.service.impl.UserServiceImpl">
+      <property name="userDao" ref="userDaoImpl" />
+   </bean>
+
+   <bean id="userController" class="com.ideas2it.employeeinformation.user.controller.UserController">
+      <property name="userService" ref="userServiceImpl" />
+   </bean>
+
+</beans>

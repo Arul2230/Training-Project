@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "com.ideas2it.employeeinformation.project.model.Project" table = "Project">
+      <id name = "id" type = "int" column = "projectId">
+         <generator class="native"/>
+      </id>
+     <bag name = "employees" cascade="save-update" table="EmployeeProject" lazy="false" inverse="false" fetch="join" >
+        <key column = "projectid"/>
+        <many-to-many column = "employeeid" entity-name="com.ideas2it.employeeinformation.employee.model.Employee"/>
+     </bag>
+      
+      <property name = "name" column = "name" type = "string"/>
+      <property name = "NumberOfResources" column = "numberofresource" type = "int"/>
+      <property name = "projectCode" column = "projectcode" type = "string"/>
+      <property name = "IsActive" column = "isactive" type = "boolean"/>
+      <property name="clientId" column="clientid"/>
+   </class>
+</hibernate-mapping>

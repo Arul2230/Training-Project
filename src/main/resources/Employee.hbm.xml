@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+    <class name = "com.ideas2it.employeeinformation.employee.model.Employee" table = "Employee">
+      <id name = "id" column = "employeeid">
+         <generator class="increment"/>
+      </id>
+      <property name = "name" column = "name" type = "string"/>
+      <property name = "salary" column = "salary" type = "long"/>
+      <property name = "emailId" column = "emailid" type = "string"/>
+      <property name = "role" column = "role" type = "string"/>
+      <property name = "birthDate" column = "birthdate" type = "date"/>
+      <property name = "dateOfJoin" column = "joindate" type = "date"/>
+      <property name = "IsActive" column = "isactive" type = "boolean"/>
+     <bag name = "projects" cascade="save-update" table="EmployeeProject" lazy="true"  inverse="true" fetch="join">
+        <key column = "employeeid"/>
+        <many-to-many column = "projectid" class="com.ideas2it.employeeinformation.project.model.Project"/>
+     </bag>
+     <bag name = "addresses" cascade ="save-update" fetch="select" lazy="false">
+         <key column ="employeeid"/>
+         <one-to-many class="com.ideas2it.employeeinformation.address.model.Address"/>
+     </bag>
+   </class>
+</hibernate-mapping>
